@@ -1,0 +1,42 @@
+<html lang="cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Yagra</title>
+
+<link href="http://v2.bootcss.com/assets/css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+  body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+
+  .diag-err {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 3px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+       -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    margin-bottom: 10px;
+
+    }
+</style>
+</head>
+<body>
+    <div class=diag-err>
+        <center><h2>文件上传失败</h2></center>
+        <p>
+        <center><h3>错误原因: %s</h3></center>
+        <center><input type="button" class="btn-large btn-inverse"
+        value="返回" onclick="window.history.back()"></center>
+    </div>
+</body>
+</html>
+

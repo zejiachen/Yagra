@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Yagra</title>
 
     <!-- Bootstrap -->
     <link href="http://v2.bootcss.com/assets/css/bootstrap.css" rel="stylesheet">
@@ -32,15 +32,17 @@
     <div class="row-fluid">
       <ul class="thumbnails">
         <li class="span4 canvas">
+          <h2>头像</h2>
           <a href="#" class="thumbnail">
             <img src="%s" alt="no avatar">
           </a>
         </li>
       <li class="span6 canvas">
+        <h2>上传头像</h2>
         <form method=post action="/cgi-bin/upload.py" enctype="multipart/form-data">
-          <input type=file class ="input-block-level "name=upfile size=45>
+          <input type=file class ="input-block-level" name=upfile accept="image/*">
           <p>
-          <input type=submit class="btn btn-primary">
+          <input type=submit class="btn-large btn-primary">
         </form>
       </li>
     </ul>

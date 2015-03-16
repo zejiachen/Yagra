@@ -7,8 +7,9 @@ from os import environ
 from datetime import datetime
 import webconf as conf
 
+
 def showpage(filename, *args):
-    filename = '../templates/' + filename 
+    filename = '../templates/' + filename
     html = open(filename, 'r')
     print 'Content-Type: text/html;charset=utf8\r\n'
     print html.read() % args
@@ -49,6 +50,10 @@ def getCookie():
         return None
     cookie = Cookie.SimpleCookie(environ['HTTP_COOKIE'])
     return cookie
+
+
+def avatarFilename(uid):
+    return uid
 
 
 def main():

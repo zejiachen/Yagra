@@ -10,3 +10,4 @@ login_expires = 60
 session_expires = 4 * 3600
 
 img_path = '/var/www/avatars/'
+img_max_size = 102400
