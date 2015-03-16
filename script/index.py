@@ -26,6 +26,8 @@ def main():
         if filename == '/':
             filename = 'no_pic'
         util.showpage('index.html', '../avatar/' + filename)
+        mysql_cursor.close()
+        mysql_conn.close()
 
 
 if __name__ == '__main__':
