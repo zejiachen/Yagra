@@ -33,7 +33,7 @@ def main():
     filelen = file_len(upfile)
     if filelen > conf.img_max_size:
         max_size = int(conf.img_max_size / 1024)
-        util.showpage('uploa_err.html', "图片大小不能超过%sK", max_size)
+        util.showpage('upload_err.html', "图片大小不能超过%sK" % max_size)
 
     # save avatar
     filename = util.avatarFilename(uid)
