@@ -2,6 +2,7 @@
 import cgi
 import time
 import Cookie
+import hashlib
 import MySQLdb
 from os import environ
 from datetime import datetime
@@ -53,7 +54,20 @@ def getCookie():
 
 
 def avatarFilename(uid):
-    return uid
+    # get username from db
+    mysql_conn = MySQLdb.connect(conf.db_host, conf.db_user,
+                                 conf.db_passwd, conf.db_name)
+    mysql_cursor = mysql_conn.cursor()
+    query = 'select * from user where uid=%s' % uid
+    mysql_cursor.execute(query)
+    result = mysql_cursor.fetchone()
+    username = result[1]
+    mysql_cursor.close()
+    mysql_conn.close()
+
+    # filename is the hash of username
+    filename = hashlib.md5(username).hexdigest()
+    return filename
 
 
 def main():
