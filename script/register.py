@@ -42,7 +42,11 @@ def do_register():
     query = 'select max(uid) from user'
     mysql_cursor.execute(query)
     result = mysql_cursor.fetchone()
-    uid = result[0] + 1
+    cur_max_id = result[0]
+    if cur_max_id:
+        uid = cur_max_id + 1
+    else:
+        uid = 1
 
     # insert into database
     query = 'insert into user values(%s, "%s", "%s", "/")' %\
