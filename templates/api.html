@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yagra</title>
+
+    <!-- Bootstrap -->
+    <link href="http://v2.bootcss.com/assets/css/bootstrap.css" rel="stylesheet">
+    
+    <style type="text/css">
+      .doc {
+        padding-left:200px;
+        padding-right:200px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Yet Another Yagra</a>
+        <ul class="nav">
+          <li><a href="/cgi-bin/index.py">首页</a></li>
+          <li class="active"><a href="#">API</a></li>
+        </ul>
+        <ul class="nav pull-right">
+          <li><a href="/cgi-bin/logout.py">退出</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="doc">
+        <h2>API Doc</h2>
+        <hr>
+        <h3>头像地址的生成</h3>
+        <h4>输入参数:</h4>
+        <li>服务端地址: server_addr</li>
+        <li>用户名: user_name</li>
+        <h4>地址生成:</h4>
+        <li>1. 对用户名求md5值, 表示为16进制小写形式, 即finger_print = hex(md5(user_name))</li>
+        <li>2. 将上一步所计算得到的finger_print值拼接在 http://server_addr/avatar/ 后构成头像地址</li>
+        <h4>代码示例:</h4>
+        <pre>
+    #!/usr/bin/python
+    import hashlib
+
+    server_addr = '210.25.189.114'
+    user_name = 'zejiachen@gmail.com'
+    finger_print = hashlib.md5(user_name).hexdigest()
+    avatar_addr = "http://{0}/avatar/{1}".format(server_addr, finger_print)
+    # 结果为: http://210.25.189.114/avatar/a69225e2777caebaa9a9db20d3bedeb5
+    print avatar_addr
+        </pre>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
