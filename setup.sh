@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 #read config
 cd script/modules/
 str_conf=`
@@ -16,7 +17,7 @@ web_path=${arr_conf[3]}
 
 
 #init database
-mysql '-h'$db_host '-u'$db_user '-p'$db_passwd <<EOF
+res=`mysql '-h'$db_host '-u'$db_user '-p'$db_passwd <<EOF
 create database if not exists yagra;
 use yagra;
 drop table if exists user;
@@ -33,7 +34,16 @@ create table session (
     ip char(16),
     expires timestamp
 );
-EOF
+desc session;
+EOF`
+#if desc session success, it means execute of sql is success
+if [ "$res" != '' ]; then
+    echo 'init database successfully'
+else
+    echo 'Fail to init database, please check config'
+    exit 1
+fi
+
 
 #mkdir and copy files
 mkdir -p $web_path'/cgi-bin'
