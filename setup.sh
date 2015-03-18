@@ -35,7 +35,6 @@ create table session (
 );
 EOF
 
-
 #mkdir and copy files
 mkdir -p $web_path'/cgi-bin'
 mkdir -p $web_path'/templates'
@@ -44,5 +43,3 @@ cp -rf script/* $web_path'/cgi-bin/'
 cp -rf templates/* $web_path'/templates/'
 cp -rf avatar/* $web_path'/html/avatar/'
 chmod a+w $web_path'/html/avatar'
-
-echo 'install successfully'
