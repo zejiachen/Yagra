@@ -6,8 +6,9 @@ db_user = 'root'
 db_passwd = 'zejiachen'
 db_name = 'yagra'
 
+web_path= '/var/www/'
+
 login_expires = 60
 session_expires = 4 * 3600
 
-img_path = '/var/www/avatars/'
 img_max_size = 102400
