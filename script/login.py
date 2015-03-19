@@ -22,19 +22,20 @@ def main():
 
 
 def do_login():
+    # get parameters for login action
     form = cgi.FieldStorage()
     username = form['username'].value
     password = form['password'].value
     servtime = int(form['servtime'].value)
     nonce = form['nonce'].value
 
-    #if servtime is expired
+    # if servtime is expired
     cur_time = int(time.time())
     if cur_time < servtime or cur_time - servtime > conf.login_expires:
         util.showpage('login_err.html', "登录超时")
         return
 
-    #check whether username is valid
+    # check whether username is valid
     mysql_conn = MySQLdb.connect(conf.db_host, conf.db_user,
                                  conf.db_passwd, conf.db_name)
     mysql_cursor = mysql_conn.cursor()
@@ -83,6 +84,7 @@ def do_login():
     cookie['sid']['expires'] = conf.session_expires
     cookie['uid'] = uid
     util.redirectTo('index.py', cookie)
+
 
 if __name__ == '__main__':
     main()

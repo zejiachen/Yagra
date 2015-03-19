@@ -15,7 +15,7 @@ def file_len(fp):
 
 
 def main():
-    #validate cookie and get cookie if valid
+    # validate cookie and get cookie if valid
     if not util.validateCookie():
         util.redirectTo('login.py')
         return
@@ -34,6 +34,7 @@ def main():
     if filelen > conf.img_max_size:
         max_size = int(conf.img_max_size / 1024)
         util.showpage('upload_err.html', "图片大小不能超过%sK" % max_size)
+        return
 
     # save avatar
     filename = util.avatarFilename(uid)
@@ -41,7 +42,7 @@ def main():
     outfile.write(upfile.read(filelen))
     outfile.close()
 
-    #update img_path in mysql
+    # update img_path in mysql
     mysql_conn = MySQLdb.connect(conf.db_host, conf.db_user,
                                  conf.db_passwd, conf.db_name)
     mysql_cursor = mysql_conn.cursor()

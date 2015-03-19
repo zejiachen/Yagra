@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#*-- encoding=utf8 --*
+'show api(generate avatar addr) page'
 import modules.util as util
 
 

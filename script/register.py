@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #*-- encoding=utf8 --*
+'implemention of registration'
 import cgi
 import time
 import Cookie
@@ -21,6 +22,7 @@ def main():
 
 
 def do_register():
+    # get input parameters
     form = cgi.FieldStorage()
     username = form['username'].value
     password = form['password'].value

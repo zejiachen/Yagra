@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#*-- encoding=utf8 --*
+'some common useful functions implementions'
 import cgi
 import time
 import Cookie

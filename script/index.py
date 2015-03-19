@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#*-- encoding=utf8 --*
 'check whether sid is valid, show index.html or login.html'
 import cgi
 import time
@@ -23,9 +24,11 @@ def main():
         mysql_cursor.execute(query)
         result = mysql_cursor.fetchone()
         filename = result[3]
+        # if user have not uploaded avatar, show default 'no_pic'
         if filename == '/':
             filename = 'no_pic'
-        util.showpage('index.html', '../avatar/' + filename)
+        username = result[1]
+        util.showpage('index.html', '../avatar/' + filename, username)
         mysql_cursor.close()
         mysql_conn.close()
 
