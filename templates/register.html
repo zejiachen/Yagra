@@ -44,8 +44,13 @@
 </head>
 
 <body>
-    <div class="container">
-      <form class="form-register" id="register" method=post action="/cgi-bin/register.py">
+  <div class="alert alert-error alert-danger hidden" id="alert-message">
+    <strong></strong>
+  </div>
+
+
+  <div class="container">
+       <form class="form-register" id="register" method=post action="/cgi-bin/register.py">
         <h2 class="form-register-heading">Register Yagra</h2>
         <strong>用户名:</strong>
         <input type="email" class="input-block-level" name="username" required="required" id="username" placeholder="邮箱">
@@ -62,11 +67,31 @@
     <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.js"></script>
     <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
     <script>
+        function hideAlert() {
+          alert_msg = $('#alert-message');
+          alert_msg.fadeTo(500, 0).slideDown(500, function() {
+            alert_msg.addClass('hidden');
+          });
+        };
+
+        function showAlert(message) {
+          alert_msg = $('#alert-message');
+          alert_msg.children('strong').text(message);
+          alert_msg.fadeTo(500, 1).removeClass('hidden').slideDown(500, function() {
+            setTimeout( function() {hideAlert();}, 2000);
+          });
+        };
+
         function register() {
+            username = $('#username').val();
             password = $('#password').val();
             repasswd = $('#repasswd').val();
+            if ( !username || !password || !repasswd) {
+                showAlert('请确认已输入所有字段!')
+                return;
+            }
             if (password != repasswd) {
-                alert('两次输入的密码不一致');
+                showAlert('两次输入的密码不一致');
             } else {
                 enc_passwd = md5(password);
                 $('#password').val(enc_passwd);

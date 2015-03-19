@@ -46,10 +46,14 @@
 <body>
     <div class="container">
 
+      <div class="alert alert-error alert-danger hidden" id="alert-message">
+          <strong></strong>
+      </div>
+
       <form class="form-signin" id="signin" method=post action="/cgi-bin/login.py">
         <h2 class="form-signin-heading">Login Yagra</h2>
-        <input type="email" class="input-block-level" name="username" id="username" placeholder="邮箱">
-        <input type="password" class="input-block-level" name="password" id="password" placeholder="密码">
+        <input type="email" class="input-block-level" name="username" id="username" required="required" placeholder="邮箱">
+        <input type="password" class="input-block-level" name="password" id="password" required="required" placeholder="密码">
         <input type="hidden" name="servtime" id="servtime">
         <input type="hidden" name="nonce" id="nonce">
         <input type="button" class="btn btn-large btn-primary" onclick="login()" value="登录">
@@ -61,19 +65,39 @@
     <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.js"></script>
     <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
     <script>
+        function hideAlert() {
+          alert_msg = $('#alert-message');
+          alert_msg.fadeTo(500, 0).slideDown(500, function() {
+            alert_msg.addClass('hidden');
+          });
+        };
+
+        function showAlert(message) {
+          alert_msg = $('#alert-message');
+          alert_msg.children('strong').text(message);
+          alert_msg.fadeTo(500, 1).removeClass('hidden').slideDown(500, function() {
+            setTimeout( function() {hideAlert();}, 2000);
+          });
+        };
+
         function login() {
-            $.getJSON('/cgi-bin/prelogin.py', function(data) {
-                servtime = data['servtime'];
-                nonce = data['nonce'];
-                username = $('#username').val();
-                password = $('#password').val();
-                password = md5(md5(password) + '|' + servtime + '|' + nonce);
-                $('#password').val(password);
-                $('#servtime').val(servtime);
-                $('#nonce').val(nonce);
-                $('#signin').submit();
-            });
-        }
+          username = $('#username').val();
+          password = $('#password').val()
+          if (!username || !password) {
+              showAlert('请输入用户名及密码!');
+            return;
+          }
+
+          $.getJSON('/cgi-bin/prelogin.py', function(data) {
+            servtime = data['servtime'];
+            nonce = data['nonce'];
+            password = md5(md5(password) + '|' + servtime + '|' + nonce);
+            $('#password').val(password);
+            $('#servtime').val(servtime);
+            $('#nonce').val(nonce);
+            $('#signin').submit();
+          });
+        };
     </script>
 
 </body>
