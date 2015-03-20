@@ -35,7 +35,7 @@ def do_register():
     mysql_cursor.execute(query)
     result = mysql_cursor.fetchone()
     if result:
-        util.showpage('login_err.html', '邮箱被占用')
+        util.showpage('register_err.html', '邮箱被占用')
         mysql_cursor.close()
         mysql_conn.close()
         return
