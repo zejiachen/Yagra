@@ -15,6 +15,7 @@
   - img\_max\_size: 头像最大的字节数
 - 安装
   - sudo ./setup.sh : 请确保当前用户具备在网站根目录(/var/www/）下创建文件/文件夹的权限，建议sudo执行
+  - apache的相关配置: 即设置cgi-bin为cgi脚本存放路径, 另外禁止对modules文件夹的访问, 以保护modules文件夹下的配置信息不被非法读取
 - 演示
   - 作者在实验室机器上部署了该项目，可通过如下地址访问：http://210.25.189.114/cgi-bin/login.py
 
